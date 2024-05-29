@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -60,6 +61,12 @@ public class ResponseAdapter extends RecyclerView.Adapter<ResponseAdapter.Respon
                 responseItem.setAutoResponse(false);
             }
         });
+
+        holder.btnDelete.setOnClickListener(v -> {
+            responseList.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, responseList.size());
+        });
     }
 
     private void deselectAllExcept(int position, boolean isSpam) {
@@ -84,12 +91,14 @@ public class ResponseAdapter extends RecyclerView.Adapter<ResponseAdapter.Respon
         TextView tvResponseText;
         CheckBox cbSpam;
         CheckBox cbAutoResponse;
+        Button btnDelete;
 
         public ResponseViewHolder(@NonNull View itemView) {
             super(itemView);
             tvResponseText = itemView.findViewById(R.id.tvResponseText);
             cbSpam = itemView.findViewById(R.id.cbSpam);
             cbAutoResponse = itemView.findViewById(R.id.cbAutoResponse);
+            btnDelete = itemView.findViewById(R.id.btnDelete);
         }
     }
 }

@@ -71,6 +71,12 @@ public class MessagesFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        saveResponses();
+    }
+
     private List<ResponseItem> loadResponses() {
         Set<String> responseSet = sharedPreferences.getStringSet(RESPONSES_KEY, new HashSet<>());
         List<ResponseItem> responses = new ArrayList<>();
